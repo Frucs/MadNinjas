@@ -20,8 +20,10 @@ while (running)
     switch (choice)
     {
         case "1":
-            Console.WriteLine("Spelet kopplas in senare.");
-            break;
+    string playerName = ReadPlayerName();
+    Console.WriteLine($"Välkommen, {playerName}!");
+    Console.WriteLine("Spelet kopplas in senare.");
+    break;
 
         case "2":
             Console.WriteLine("Topplistan kopplas in senare.");
@@ -44,5 +46,20 @@ while (running)
     }
 }
         }
+        public string ReadPlayerName()
+{
+    while (true)
+    {
+        Console.Write("Ditt namn: ");
+        string? name = Console.ReadLine();
+
+        if (!string.IsNullOrWhiteSpace(name))
+        {
+            return name.Trim();
+        }
+
+        Console.WriteLine("Namnet får inte vara tomt. Försök igen.");
+    }
+}
     }
 }
