@@ -2,6 +2,11 @@
 {
     public class Deck
     {
-        List<Card> Cards = new List<Card>();
+        List<Card> Cards = new List<Card>()
+        {
+            new Card(),
+            new Card(),
+            new Card()
+        };
     }
 }
