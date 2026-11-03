@@ -32,9 +32,9 @@ public void AddResult(string name, int finalBalance, int roundsPlayed) // lägge
 		RoundsPlayed = roundsPlayed
 	});
 
-	scores = scores  //behåller bara 10 bästa resultaten
+	scores = scores  //behåller bara 5 bästa resultaten
 		.OrderByDescending(s => s.FinalBalance)
-		.Take(10)
+		.Take(5)
 		.ToList();
 	Save(scores);
 }
