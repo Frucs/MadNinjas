@@ -8,7 +8,6 @@ public class ScoreBoard
     public ScoreBoard()
     {
     }
-
     public List<ScoreEntry> Load()
     {
         try
