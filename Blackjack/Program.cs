@@ -1,4 +1,10 @@
 ﻿using Blackjack;
-
+Deck temp = new Deck();
+temp.Shuffle();
+temp.Look();
+Console.WriteLine();
+temp = new Deck();
+temp.Shuffle();
+temp.Look();
 ConsoleUI ui = new ConsoleUI();
 ui.Run();

@@ -2,16 +2,18 @@
 {
     public class Card
     {
-        string Face = "Ace";
+        public string Face = "Ace";
         public string[] Faces = ["Ace", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King"];
         public string[] Colors = ["Hearts", "Clubs", "Diamonds", "Spade"];
-        string Color = "Hearts";
-        int Value = 14;
-        int SecondaryValue = 0;
+        public string Color = "Hearts";
+        public string FullFace = "Ace of Hearts";
+        public int Value = 14;
+        public int SecondaryValue = 0;
         public Card(string face, string color)
         {
             Face = face;
             Color = color;
+            FullFace = face + " of " + color;
             switch (Face)
             {
                 case ("Ace"):
@@ -67,6 +69,10 @@
                     SecondaryValue = Value;
                     break;
             }
+        }
+        public void Look()
+        {
+            Console.WriteLine(FullFace);
         }
     }
 }
