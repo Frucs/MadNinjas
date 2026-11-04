@@ -46,4 +46,19 @@ public class ScoreBoard
         string json = JsonSerializer.Serialize(scores, new JsonSerializerOptions { WriteIndented = true });
         File.WriteAllText(FilePath, json);
     }
+    public void ShowTopList()
+    {
+        var scores = Load();
+
+        Console.WriteLine("\n=== TOPPLISTA ===");
+
+        int place = 1;
+
+        foreach (var score in scores)
+        {
+            Console.WriteLine(
+                $"{place}. {score.Name} - {score.FinalBalance} kr ({score.RoundsPlayed} rundor)");
+            place++;
+        }
+    }
 }

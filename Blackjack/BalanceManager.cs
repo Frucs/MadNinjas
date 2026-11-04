@@ -2,6 +2,9 @@
 public class BalanceManager
 {
     public int Balance { get; private set; } = 100;  //spelarensd saldo start 100kr
+    public BalanceManager()
+    {
+    }
     public int AskForBet()
     {
         while (true)
