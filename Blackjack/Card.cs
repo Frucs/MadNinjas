@@ -7,7 +7,7 @@
         public string[] Colors = ["Hearts", "Clubs", "Diamonds", "Spade"];
         public string Color = "Hearts";
         public string FullFace = "Ace of Hearts";
-        public int Value = 14;
+        public int Value = 11;
         public int SecondaryValue = 0;
         public Card(string face, string color)
         {
@@ -17,7 +17,7 @@
             switch (Face)
             {
                 case ("Ace"):
-                    Value = 14;
+                    Value = 11;
                     SecondaryValue = 1;
                     break;
                 case ("Two"):
@@ -57,15 +57,15 @@
                     SecondaryValue = Value;
                     break;
                 case ("Jack"):
-                    Value = 11;
+                    Value = 10;
                     SecondaryValue = Value;
                     break;
                 case ("Queen"):
-                    Value = 12;
+                    Value = 10;
                     SecondaryValue = Value;
                     break;
                 case ("King"):
-                    Value = 13;
+                    Value = 10;
                     SecondaryValue = Value;
                     break;
             }
