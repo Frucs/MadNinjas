@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#073e30"><title>MadNinjas — Blackjack</title>
+<link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="cards.css">
+</head>
+<body>
+<div class="app-shell">
+<header class="topbar">
+ <a class="brand" href="./" aria-label="MadNinjas Blackjack home"><span class="brand-mark" aria-hidden="true">♠</span><span><span class="brand-name">MADNINJAS</span><span class="brand-subtitle">BLACKJACK CLUB</span></span></a>
+ <nav aria-label="Main navigation"><button class="nav-button" id="rules-button">Rules</button><button class="nav-button" id="scores-button">Leaderboard</button></nav>
+</header>
+<main class="casino" aria-label="Blackjack table">
+<div class="table-rim"><div class="felt">
+ <div class="table-topline"><span class="table-label">ONE TABLE. YOU VERSUS THE DEALER.</span><span class="demo-badge">C# SERVER</span></div>
+ <section class="dealer-zone" aria-label="Dealer hand"><div class="zone-heading"><div><span class="eyebrow">THE HOUSE</span><h2>Dealer</h2></div><span id="dealer-score" class="score-pill" aria-label="Dealer score">—</span></div><div id="dealer-cards" class="card-hand"></div></section>
+ <div class="table-lettering" aria-hidden="true"><span class="spade">♠</span><h1 class="table-title">BLACKJACK</h1><p class="payout">BLACKJACK PAYS 3 : 2</p><p class="table-rule">DEALER STANDS ON ALL 17s</p></div>
+ <p id="round-message" class="round-message" role="status" aria-live="polite">Welcome to the table. Take a seat to begin.</p>
+ <p id="round-summary" class="round-summary" aria-live="polite"></p>
+ <section class="player-zone" aria-label="Your hand"><div id="player-cards" class="card-hand"></div><div class="zone-heading"><div class="player-identity"><span class="avatar" aria-hidden="true">♠</span><div><span class="eyebrow">YOUR SEAT</span><h2 id="player-name">Player</h2></div></div><span id="player-score" class="score-pill" aria-label="Your score">—</span></div></section>
+ <div class="bet-marker"><span class="chip-stack" aria-hidden="true">♠</span><span class="bet-value" id="table-bet">YOUR BET</span></div>
+</div></div>
+<section class="control-dock" aria-label="Game controls">
+ <div class="balance-block"><span class="label">YOUR BALANCE</span><strong class="balance-value" id="balance">100 <small>kr</small></strong><span class="session-result" id="session-result">Starting balance when you take a seat</span><span class="round-count" id="round-count">0 rounds played</span></div>
+ <div class="bet-controls"><label for="bet-input">BET <span id="bet-range">1–100 kr</span></label><div class="bet-input-wrap"><input id="bet-input" type="text" value="20" inputmode="numeric" maxlength="16" aria-describedby="bet-error"><span>kr</span></div><div class="chip-options" aria-label="Choose a bet"><button class="chip-button" data-bet="10">10</button><button class="chip-button" data-bet="20">20</button><button class="chip-button" data-bet="50">50</button><button class="chip-button" data-bet="all">All in</button></div><p class="error-message" id="bet-error" role="alert"></p></div>
+ <div class="game-actions"><button class="primary-button" id="deal-button">Take a seat <span aria-hidden="true">↗</span></button><div class="turn-actions"><button class="action-button" id="hit-button" disabled>Hit <span aria-hidden="true">＋</span></button><button class="action-button" id="stand-button" disabled>Stand <span aria-hidden="true">▱</span></button></div></div>
+ <button class="session-button" id="end-button" disabled>End<br>session</button>
+</section>
+<button id="reconnect-button" class="nav-button" hidden>Reconnect to server</button>
+<p class="footer-note">ONE PLAYER · ONE DECK · NO REAL MONEY <span>C# game server · Shared JSON leaderboard</span></p>
+</main>
+</div>
+<dialog id="welcome-dialog" class="modal" aria-labelledby="welcome-title"><form id="name-form" novalidate><div class="modal-header"><span class="eyebrow">WELCOME TO MADNINJAS</span><button class="close-button" type="button" data-close aria-label="Close">×</button></div><h2 id="welcome-title">Your seat is waiting.</h2><p>You start with 100 kr in play chips. What is your name?</p><div class="field"><label for="name-input">Your name</label><input id="name-input" autocomplete="given-name" maxlength="40" placeholder="For example, Andreas" aria-describedby="name-error"></div><p id="name-error" class="error-message" role="alert"></p><div class="modal-actions"><button class="primary-button" type="submit">Join the table <span aria-hidden="true">↗</span></button></div></form></dialog>
+<dialog id="rules-dialog" class="modal" aria-labelledby="rules-title"><div class="modal-header"><span class="eyebrow">HOW TO PLAY</span><button class="close-button" data-close aria-label="Close rules">×</button></div><h2 id="rules-title">Closest to 21 wins.</h2><ol class="rules-list"><li>Bet between 1 kr and your full balance. You and the dealer each receive two cards. One dealer card is hidden.</li><li>Cards 2–10 are worth their face value. Jacks, queens and kings are worth 10. Aces count as 1 or 11, whichever is best for the hand.</li><li>Blackjack is an ace and a card worth 10 as your first two cards. The round ends immediately. If only you have blackjack, you win 1.5 times your bet, rounded down. If both have blackjack, the round is a tie.</li><li>Choose Hit or Stand. At 21, your turn ends. Going over 21 is an immediate loss.</li><li>The dealer reveals the hidden card and draws until reaching at least 17. The dealer also stands on 17 with an ace counted as 11.</li><li>A regular win returns your bet plus an equal amount in winnings. A tie returns your bet. A loss costs your bet.</li><li>You start with 100 kr. The session ends when you choose to leave or your balance reaches zero. A new shuffled deck is created before a round if fewer than 15 cards remain.</li></ol><p>Doubling, splitting and insurance are not included. Completed sessions are saved by the C# server in a shared JSON leaderboard.</p></dialog>
+<dialog id="scores-dialog" class="modal" aria-labelledby="scores-title"><div class="modal-header"><span class="eyebrow">BEST SESSIONS</span><button class="close-button" data-close aria-label="Close leaderboard">×</button></div><h2 id="scores-title">The table’s top five.</h2><p>Completed session results from the shared JSON leaderboard.</p><ol id="score-list" class="score-list"></ol><p id="scores-empty" class="empty-state">No completed sessions yet. Your place on the leaderboard is waiting.</p></dialog>
+<script type="module" src="app.js"></script>
+</body></html>

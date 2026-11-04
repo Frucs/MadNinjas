@@ -1,0 +1,12 @@
+{
+  "main": "8e31c98",
+  "musseGame": "5bfdbf6714d87c352d9198046ea5b2c9067f27a0",
+  "derinMerged": "247875f1141614677fb862ba9c54f56998994d77",
+  "sourceRepo": "https://github.com/Frucs/MadNinjas",
+  "integrationOnlyChanges": [
+    "Game.cs: internal partial class",
+    "Deck.cs: removed Draw console output",
+    "Game.Web.cs: web round flow and state adapter",
+    "ScoreBoard.cs: filter invalid rows and atomically replace JSON"
+  ]
+}
