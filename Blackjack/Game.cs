@@ -16,7 +16,7 @@ namespace Blackjack
 
         public void StartGame()
         {
-            
+
             // 1. Visa välkomstmeddelande
 
             // 2. Blanda kortleken
@@ -32,6 +32,7 @@ namespace Blackjack
             dealerCards.Add(deck.Draw());
 
             // 5. Visa spelarens kort
+            Console.WriteLine("Your hand:");
             foreach (Card card in playerCards)
             {
                 card.Look();
@@ -39,20 +40,75 @@ namespace Blackjack
 
             // 6. Visa dealerns första kort
             dealerCards[0].Look();
-
             // 7. Fråga spelaren om Hit eller Stand
+            string player = "";
+            int playerScore = CalculateScore(playerCards);
 
-            // 8. Om Hit - dra ett nytt kort
+            while (playerScore < 21 && player.ToLower() != "stand")
+            {
+                Console.WriteLine("Draw a card (Hit) or stop (Stand)?");
+                player = Console.ReadLine();
 
-            // 9. Kontrollera om spelaren får över 21
+                if (player.ToLower() == "hit")
+                {
+                    Card newCard = deck.Draw();
+                    playerCards.Add(newCard);
+                    newCard.Look();
 
-            // 10. Om Stand - låt dealern spela
+                    playerScore = CalculateScore(playerCards);
+                }
+                else if (player.ToLower() != "stand")
+                {
+                    Console.WriteLine("Please enter Hit or Stand.");
+                }
+            }
 
-            // 11. Dealern drar kort tills den har minst 17
+            // 8. Kontrollera om spelaren får över 21
+            if (playerScore > 21)
+            {
+                Console.WriteLine("You got " + playerScore + ". You lose!");
+                return;
+            }
 
-            // 12. Jämför poängen
+            // 9. Dealerns tur
+            int dealerScore = CalculateScore(dealerCards);
 
-            // 13. Visa vinnaren
+            Console.WriteLine("Dealer's turn!");
+            
+            // 10. Dealern drar kort tills den har minst 17
+            while (dealerScore < 17)
+            {
+                Card newCard = deck.Draw();
+                dealerCards.Add(newCard);
+                newCard.Look();
+
+                dealerScore = CalculateScore(dealerCards);
+            }
+
+            // 11. Visa och jämför poängen
+            playerScore = CalculateScore(playerCards);
+            dealerScore = CalculateScore(dealerCards);
+
+            Console.WriteLine("Your score: " + playerScore);
+            Console.WriteLine("Dealer's score: " + dealerScore);
+
+            // 12. Visa vinnaren
+            if (dealerScore > 21)
+            {
+                Console.WriteLine("Dealer busts! You win!");
+            }
+            else if (playerScore > dealerScore)
+            {
+                Console.WriteLine("You win!");
+            }
+            else if (dealerScore > playerScore)
+            {
+                Console.WriteLine("Dealer wins!");
+            }
+            else
+            {
+                Console.WriteLine("It's a tie!");
+            }
 
 
         }
