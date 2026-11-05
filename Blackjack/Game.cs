@@ -10,6 +10,7 @@ namespace Blackjack
         private List<Card> dealerCards = new List<Card>();
         private Deck deck = new Deck();
         string player = "";
+        int balance = 0;
         int bet = 0;
         public Game()
         {
@@ -19,9 +20,42 @@ namespace Blackjack
 
         public void StartGame(string name = "test")
         {
+            // Kollar om profilen finns redan, annars skapar den en ny profil
+            ScoreBoard scoreBoard = new ScoreBoard();
+            List<ScoreEntry> scoress = scoreBoard.Load();
+            bool hasProfile = false;
+            foreach (ScoreEntry score in scoress)
+            {
+                if (score.Name == name)
+                {
+                    Console.WriteLine("Welcome back, " + name + "!");
+                    hasProfile = true;
+                    balance = score.FinalBalance;
+                    break;
+                }
+            }
+            if (!hasProfile)
+            {
+                scoreBoard.NewProfile(name);
+                balance = 100;
+            }
             // 1. Visa välkomstmeddelande
-            Console.WriteLine("Din bet:");
-            bet = int.Parse(Console.ReadLine());
+            Console.WriteLine("Din saldo: " + balance);
+            bool BetOkay = false;
+            while (!BetOkay)
+            {
+                Console.WriteLine("Din bet:");
+                bet = int.Parse(Console.ReadLine());
+                if (bet > 0 && bet <= balance)
+                {
+                    BetOkay = true;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid bet. Please enter a valid amount.");
+                }
+            }
+
 
             // 2. Blanda kortleken
             deck.Shuffle();
@@ -43,6 +77,7 @@ namespace Blackjack
             }
 
             // 6. Visa dealerns första kort
+            Console.WriteLine("Dealer's Card:");
             dealerCards[0].Look();
             // 7. Fråga spelaren om Hit eller Stand
             string player = "";
@@ -98,7 +133,7 @@ namespace Blackjack
 
             // 12. Visa vinnaren
             if (dealerScore > 21)
-            { 
+            {
                 Console.WriteLine("Dealer busts! You win!");
                 WinGame(name);
             }
@@ -109,6 +144,7 @@ namespace Blackjack
             else if (dealerScore > playerScore)
             {
                 Console.WriteLine("Dealer wins!");
+                LoseGame(name);
             }
             else
             {
@@ -144,9 +180,37 @@ namespace Blackjack
         {
             Console.WriteLine("You win!");
             BalanceManager balMan = new BalanceManager();
-            balMan.Win(10);  // Öka spelarens saldo med 10 kr
+            balMan.Win(bet);  // Öka spelarens saldo med bet
             ScoreBoard scoreBoard = new ScoreBoard();
-            scoreBoard.AddResult(winname, bet, 1);  // Lägg till poängen i score board
+            List<ScoreEntry> scoress = scoreBoard.Load();
+            foreach (ScoreEntry score in scoress)
+            {
+                if (score.Name == winname)
+                {
+                    score.FinalBalance = balance + bet;
+                    break;
+                }
+            }
+            scoreBoard.Save(scoress);//spara nya scoreboarden
+            //scoreBoard.AddResult(winname, balance + bet, 1);  // Lägg till poängen i score board
+        }
+        private void LoseGame(string losename)
+        {
+            Console.WriteLine("You Lose!");
+            BalanceManager balMan = new BalanceManager();
+            balMan.Win(bet);  // Dra spelarens saldo med bet
+            ScoreBoard scoreBoard = new ScoreBoard();
+            List<ScoreEntry> scoress = scoreBoard.Load();
+            foreach (ScoreEntry score in scoress)
+            {
+                if (score.Name == losename)
+                {
+                    score.FinalBalance = balance - bet;
+                    break;
+                }
+            }
+            scoreBoard.Save(scoress);//spara nya scoreboarden
+            //scoreBoard.AddResult(winname, balance - bet, 1);  // dra poängen i score board
         }
 
     }
