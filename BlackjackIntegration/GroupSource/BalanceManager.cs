@@ -10,7 +10,7 @@ public class BalanceManager
         while (true)
         {
             Console.Write($"Du har {Balance} kr. Insats (1-{Balance}):");
-            string input = Console.ReadLine();
+            string? input = Console.ReadLine();
             if (int.TryParse(input, out int bet))
             {
                 if (bet >= 1 && bet <= Balance)

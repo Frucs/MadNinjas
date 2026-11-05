@@ -60,7 +60,7 @@ Do not replace the group’s repository with this snapshot. The group’s consol
 
 The reported incorrect winner could not be reproduced without the original round’s cards. The independent reference agreed with all 20,000 tested outcomes and balances. Review did find and fix stale browser state after failed server responses and lingering confetti from the preceding round. The adapter now refreshes authoritative state after a failed mutation, clears expired sessions, and provides reconnect. Result saving is reported only after the host confirms it.
 
-Two nullable warnings remain in copied group classes (ScoreEntry.Name and console input in BalanceManager); the build succeeds. Server restarts reset active games but preserve saved JSON results.
+The integration copies initialize ScoreEntry.Name and accept nullable console input in BalanceManager; the build has no nullable warnings. Server restarts reset active games but preserve saved JSON results.
 
 ## Share on the same Wi-Fi
 
