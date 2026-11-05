@@ -9,15 +9,19 @@ namespace Blackjack
         private List<Card> playerCards = new List<Card>();
         private List<Card> dealerCards = new List<Card>();
         private Deck deck = new Deck();
+        string player = "";
+        int bet = 0;
         public Game()
         {
 
         }
 
-        public void StartGame()
-        {
 
+        public void StartGame(string name = "test")
+        {
             // 1. Visa välkomstmeddelande
+            Console.WriteLine("Din bet:");
+            bet = int.Parse(Console.ReadLine());
 
             // 2. Blanda kortleken
             deck.Shuffle();
@@ -74,7 +78,7 @@ namespace Blackjack
             int dealerScore = CalculateScore(dealerCards);
 
             Console.WriteLine("Dealer's turn!");
-            
+
             // 10. Dealern drar kort tills den har minst 17
             while (dealerScore < 17)
             {
@@ -94,12 +98,13 @@ namespace Blackjack
 
             // 12. Visa vinnaren
             if (dealerScore > 21)
-            {
+            { 
                 Console.WriteLine("Dealer busts! You win!");
+                WinGame(name);
             }
             else if (playerScore > dealerScore)
             {
-                Console.WriteLine("You win!");
+                WinGame(name);
             }
             else if (dealerScore > playerScore)
             {
@@ -135,5 +140,14 @@ namespace Blackjack
             return totalScore;
 
         }
+        private void WinGame(string winname)
+        {
+            Console.WriteLine("You win!");
+            BalanceManager balMan = new BalanceManager();
+            balMan.Win(10);  // Öka spelarens saldo med 10 kr
+            ScoreBoard scoreBoard = new ScoreBoard();
+            scoreBoard.AddResult(winname, bet, 1);  // Lägg till poängen i score board
+        }
+
     }
 }
