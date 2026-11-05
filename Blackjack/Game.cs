@@ -71,17 +71,20 @@ namespace Blackjack
 
             // 5. Visa spelarens kort
             Console.WriteLine("Your hand:");
+
             foreach (Card card in playerCards)
             {
                 card.Look();
             }
+            int playerScore = CalculateScore(playerCards);
+            playerScore = CalculateScore(playerCards);
+            Console.WriteLine("Your score: " + playerScore);
 
             // 6. Visa dealerns första kort
             Console.WriteLine("Dealer's Card:");
             dealerCards[0].Look();
             // 7. Fråga spelaren om Hit eller Stand
             string player = "";
-            int playerScore = CalculateScore(playerCards);
 
             while (playerScore < 21 && player.ToLower() != "stand")
             {
@@ -95,6 +98,7 @@ namespace Blackjack
                     newCard.Look();
 
                     playerScore = CalculateScore(playerCards);
+                    Console.WriteLine("Your score: " + playerScore);
                 }
                 else if (player.ToLower() != "stand")
                 {
@@ -105,7 +109,8 @@ namespace Blackjack
             // 8. Kontrollera om spelaren får över 21
             if (playerScore > 21)
             {
-                Console.WriteLine("You got " + playerScore + ". You lose!");
+                Console.WriteLine("You lose!");
+                LoseGame(name);
                 return;
             }
 
@@ -120,7 +125,6 @@ namespace Blackjack
                 Card newCard = deck.Draw();
                 dealerCards.Add(newCard);
                 newCard.Look();
-
                 dealerScore = CalculateScore(dealerCards);
             }
 
