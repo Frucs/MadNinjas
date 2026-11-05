@@ -6,62 +6,62 @@ namespace Blackjack
         {
             bool running = true;
 
-while (running)
-{
-    Console.WriteLine("\n=== Blackjack ===");
-    Console.WriteLine("1. Spela");
-    Console.WriteLine("2. Topplista");
-    Console.WriteLine("3. Regler");
-    Console.WriteLine("4. Avsluta");
-    Console.Write("Välj 1–4: ");
+            while (running)
+            {
+                Console.WriteLine("\n=== Blackjack ===");
+                Console.WriteLine("1. Spela");
+                Console.WriteLine("2. Topplista");
+                Console.WriteLine("3. Regler");
+                Console.WriteLine("4. Avsluta");
+                Console.Write("Välj 1–4: ");
 
-    string? choice = Console.ReadLine();
+                string? choice = Console.ReadLine();
 
-    switch (choice)
-    {
-        case "1":
-            string playerName = ReadPlayerName();
-            Console.WriteLine($"Välkommen, {playerName}!");
-            Game game = new Game(); // Skapar ett spel.
-            game.StartGame();       // Startar spelet.
-            break;  
+                switch (choice)
+                {
+                    case "1":
+                        string playerName = ReadPlayerName();
+                        Console.WriteLine($"Välkommen, {playerName}!");
+                        Game game = new Game(); // Skapar ett spel.
+                        game.StartGame(playerName);       // Startar spelet.
+                        break;
 
-        case "2":
-            ScoreBoard board = new ScoreBoard();
-            board.ShowTopList();
-            break;
+                    case "2":
+                        ScoreBoard board = new ScoreBoard();
+                        board.ShowTopList();
+                        break;
 
-        case "3":
-            Console.WriteLine("Kom närmare 21 än dealern utan att gå över.");
-            Console.WriteLine("Du kan dra kort eller stanna.");
-            Console.WriteLine("Dealern drar kort tills summan är minst 17.");
-            break;
+                    case "3":
+                        Console.WriteLine("Kom närmare 21 än dealern utan att gå över.");
+                        Console.WriteLine("Du kan dra kort eller stanna.");
+                        Console.WriteLine("Dealern drar kort tills summan är minst 17.");
+                        break;
 
-        case "4":
-            running = false;
-            Console.WriteLine("Tack för att du spelade!");
-            break;
+                    case "4":
+                        running = false;
+                        Console.WriteLine("Tack för att du spelade!");
+                        break;
 
-        default:
-            Console.WriteLine("Felaktigt val. Ange en siffra mellan 1 och 4.");
-            break;
-    }
-}
+                    default:
+                        Console.WriteLine("Felaktigt val. Ange en siffra mellan 1 och 4.");
+                        break;
+                }
+            }
         }
         public string ReadPlayerName()
-{
-    while (true)
-    {
-        Console.Write("Ditt namn: ");
-        string? name = Console.ReadLine();
-
-        if (!string.IsNullOrWhiteSpace(name))
         {
-            return name.Trim();
-        }
+            while (true)
+            {
+                Console.Write("Ditt namn: ");
+                string? name = Console.ReadLine();
 
-        Console.WriteLine("Namnet får inte vara tomt. Försök igen.");
-    }
-}
+                if (!string.IsNullOrWhiteSpace(name))
+                {
+                    return name.Trim();
+                }
+
+                Console.WriteLine("Namnet får inte vara tomt. Försök igen.");
+            }
+        }
     }
 }
