@@ -20,13 +20,15 @@ while (running)
     switch (choice)
     {
         case "1":
-    string playerName = ReadPlayerName();
-    Console.WriteLine($"Välkommen, {playerName}!");
-    Console.WriteLine("Spelet kopplas in senare.");
-    break;
+            string playerName = ReadPlayerName();
+            Console.WriteLine($"Välkommen, {playerName}!");
+            Game game = new Game(); // Skapar ett spel.
+            game.StartGame();       // Startar spelet.
+            break;  
 
         case "2":
-            Console.WriteLine("Topplistan kopplas in senare.");
+            ScoreBoard board = new ScoreBoard();
+            board.ShowTopList();
             break;
 
         case "3":
