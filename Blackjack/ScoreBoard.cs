@@ -61,11 +61,8 @@ public class ScoreBoard
             place++;
         }
     }
-
     public void NewProfile(string name)
     {
         AddResult(name, 100, 0); // Lägg till en ny profil med startbalans 100 och 0 rundor spelade
     }
-
-
 }
