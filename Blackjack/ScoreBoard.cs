@@ -41,7 +41,7 @@ public class ScoreBoard
         Save(scores);
     }
 
-    private void Save(List<ScoreEntry> scores)
+    public void Save(List<ScoreEntry> scores)
     {
         string json = JsonSerializer.Serialize(scores, new JsonSerializerOptions { WriteIndented = true });
         File.WriteAllText(FilePath, json);
