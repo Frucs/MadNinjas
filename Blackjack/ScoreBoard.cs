@@ -34,9 +34,13 @@ public class ScoreBoard
             RoundsPlayed = roundsPlayed
         });
 
-        scores = scores  //behåller bara 5 bästa resultaten
+        SortScores(scores);//Använder SortScores funktionen för att sortera Leaderboarden i storleks-ordning.
+    }
+    public void SortScores(List<ScoreEntry> scores)
+    {
+        scores = scores  //behåller bara 99 bästa resultaten
             .OrderByDescending(s => s.FinalBalance)
-            .Take(5)
+            .Take(99)
             .ToList();
         Save(scores);
     }
@@ -50,7 +54,7 @@ public class ScoreBoard
     {
         var scores = Load();
 
-        Console.WriteLine("\n=== TOPPLISTA ===");
+        Console.WriteLine("=== TOPPLISTA ===");
 
         int place = 1;
 
@@ -59,6 +63,7 @@ public class ScoreBoard
             Console.WriteLine(
                 $"{place}. {score.Name} - {score.FinalBalance} kr ({score.RoundsPlayed} rundor)");
             place++;
+            if(place == 6) { Console.WriteLine(); break; } // Metoden visar max 5 Spelare.
         }
     }
     public void NewProfile(string name)

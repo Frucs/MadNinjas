@@ -9,9 +9,9 @@ namespace Blackjack
         private List<Card> playerCards = new List<Card>();
         private List<Card> dealerCards = new List<Card>();
         private Deck deck = new Deck();
-        string player = "";
         int balance = 0;
         int bet = 0;
+        int rounds = 0;
         public Game()
         {
 
@@ -26,11 +26,14 @@ namespace Blackjack
             bool hasProfile = false;
             foreach (ScoreEntry score in scoress)
             {
-                if (score.Name == name)
+                if (score.Name.ToLower() == name.ToLower())
                 {
+                    // Ifall spelaren redan har spelat, då får den sin tidigare Saldo
+                    name = score.Name;
                     Console.WriteLine("Welcome back, " + name + "!");
                     hasProfile = true;
                     balance = score.FinalBalance;
+                    rounds = score.RoundsPlayed;
                     break;
                 }
             }
@@ -40,19 +43,28 @@ namespace Blackjack
                 balance = 100;
             }
             // 1. Visa välkomstmeddelande
-            Console.WriteLine("Din saldo: " + balance);
+            Console.WriteLine("Your balance: " + balance);
+            // Fråga hur mycket spelaren vill betta.
+            // Fel input accepteras inte.
             bool BetOkay = false;
             while (!BetOkay)
             {
-                Console.WriteLine("Din bet:");
-                bet = int.Parse(Console.ReadLine());
-                if (bet > 0 && bet <= balance)
+                try
                 {
-                    BetOkay = true;
+                    Console.Write("Your bet: ");
+                    bet = int.Parse(Console.ReadLine());
+                    if (bet > 0 && bet <= balance)
+                    {
+                        BetOkay = true;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid bet. Please enter a valid amount.");
+                    }
                 }
-                else
+                catch
                 {
-                    Console.WriteLine("Invalid bet. Please enter a valid amount.");
+                    Console.WriteLine("Invalid bet. Please enter a valid amount. Only Numbers.");
                 }
             }
 
@@ -84,23 +96,23 @@ namespace Blackjack
             Console.WriteLine("Dealer's Card:");
             dealerCards[0].Look();
             // 7. Fråga spelaren om Hit eller Stand
-            string player = "";
+            string hitOrStand = "";
 
-            while (playerScore < 21 && player.ToLower() != "stand")
+            while (playerScore < 21 && hitOrStand.ToLower() != "stand")
             {
                 Console.WriteLine("Draw a card (Hit) or stop (Stand)?");
-                player = Console.ReadLine();
+                hitOrStand = Console.ReadLine();
 
-                if (player.ToLower() == "hit")
+                if (hitOrStand.ToLower() == "hit")
                 {
                     Card newCard = deck.Draw();
                     playerCards.Add(newCard);
                     newCard.Look();
 
                     playerScore = CalculateScore(playerCards);
-                    Console.WriteLine("Your score: " + playerScore);
+                    Console.WriteLine("Your score: " + playerScore + "\n");
                 }
-                else if (player.ToLower() != "stand")
+                else if (hitOrStand.ToLower() != "stand")
                 {
                     Console.WriteLine("Please enter Hit or Stand.");
                 }
@@ -109,7 +121,7 @@ namespace Blackjack
             // 8. Kontrollera om spelaren får över 21
             if (playerScore > 21)
             {
-                Console.WriteLine("You lose!");
+                Console.WriteLine("You drew higher than 21! ");
                 LoseGame(name);
                 return;
             }
@@ -138,7 +150,7 @@ namespace Blackjack
             // 12. Visa vinnaren
             if (dealerScore > 21)
             {
-                Console.WriteLine("Dealer busts! You win!");
+                Console.WriteLine("Dealer busts!");
                 WinGame(name);
             }
             else if (playerScore > dealerScore)
@@ -152,7 +164,8 @@ namespace Blackjack
             }
             else
             {
-                Console.WriteLine("It's a tie!");
+                Console.WriteLine("It's a tie! Your balance remains " + balance +".\n");
+                SavePlayer(name, balance, rounds + 1); //Save the player, sort the Leaderboard.
             }
 
 
@@ -183,39 +196,33 @@ namespace Blackjack
         private void WinGame(string winname)
         {
             Console.WriteLine("You win!");
+            Console.WriteLine("Your new balance is: " + (balance + bet) + "\n");
             BalanceManager balMan = new BalanceManager();
             balMan.Win(bet);  // Öka spelarens saldo med bet
-            ScoreBoard scoreBoard = new ScoreBoard();
-            List<ScoreEntry> scoress = scoreBoard.Load();
-            foreach (ScoreEntry score in scoress)
-            {
-                if (score.Name == winname)
-                {
-                    score.FinalBalance = balance + bet;
-                    break;
-                }
-            }
-            scoreBoard.Save(scoress);//spara nya scoreboarden
-            //scoreBoard.AddResult(winname, balance + bet, 1);  // Lägg till poängen i score board
+            SavePlayer(winname, balance + bet, rounds + 1);
         }
         private void LoseGame(string losename)
         {
-            Console.WriteLine("You Lose!");
+            Console.WriteLine("You lose!");
+            Console.WriteLine("Your new balance is: " + (balance - bet) + "\n");
             BalanceManager balMan = new BalanceManager();
             balMan.Win(bet);  // Dra spelarens saldo med bet
+            SavePlayer(losename, balance - bet, rounds + 1);
+        }
+        private void SavePlayer(string name, int balance, int rounds)
+        {
             ScoreBoard scoreBoard = new ScoreBoard();
             List<ScoreEntry> scoress = scoreBoard.Load();
             foreach (ScoreEntry score in scoress)
             {
-                if (score.Name == losename)
+                if (score.Name.ToLower() == name.ToLower())
                 {
-                    score.FinalBalance = balance - bet;
+                    score.FinalBalance = balance;
+                    score.RoundsPlayed = rounds;
                     break;
                 }
             }
-            scoreBoard.Save(scoress);//spara nya scoreboarden
-            //scoreBoard.AddResult(winname, balance - bet, 1);  // dra poängen i score board
+            scoreBoard.SortScores(scoress);//sortera och spara nya scoreboarden
         }
-
     }
 }

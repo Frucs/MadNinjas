@@ -72,7 +72,8 @@
         }
         public void Look()
         {
-            Console.WriteLine(FullFace);
+            if(Value == SecondaryValue) { Console.WriteLine(FullFace + " (" + Value + ")"); }
+            else { Console.WriteLine(FullFace + " (" + SecondaryValue + " or " + Value + ")"); }
         }
     }
 }

@@ -8,7 +8,7 @@ namespace Blackjack
 
             while (running)
             {
-                Console.WriteLine("\n=== Blackjack ===");
+                Console.WriteLine("=== Blackjack ===");
                 Console.WriteLine("1. Spela");
                 Console.WriteLine("2. Topplista");
                 Console.WriteLine("3. Regler");
@@ -17,11 +17,12 @@ namespace Blackjack
 
                 string? choice = Console.ReadLine();
 
+                Console.WriteLine();
+
                 switch (choice)
                 {
                     case "1":
                         string playerName = ReadPlayerName();
-                        Console.WriteLine($"Välkommen, {playerName}!");
                         Game game = new Game(); // Skapar ett spel.
                         game.StartGame(playerName);       // Startar spelet.
                         break;
@@ -34,7 +35,7 @@ namespace Blackjack
                     case "3":
                         Console.WriteLine("Kom närmare 21 än dealern utan att gå över.");
                         Console.WriteLine("Du kan dra kort eller stanna.");
-                        Console.WriteLine("Dealern drar kort tills summan är minst 17.");
+                        Console.WriteLine("Dealern drar kort tills summan är minst 17.\n");
                         break;
 
                     case "4":
@@ -43,7 +44,7 @@ namespace Blackjack
                         break;
 
                     default:
-                        Console.WriteLine("Felaktigt val. Ange en siffra mellan 1 och 4.");
+                        Console.WriteLine("Felaktigt val. Ange en siffra mellan 1 och 4.\n");
                         break;
                 }
             }
