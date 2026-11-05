@@ -23,7 +23,7 @@ while (running)
             string playerName = ReadPlayerName();
             Console.WriteLine($"Välkommen, {playerName}!");
             Game game = new Game(); // Skapar ett spel.
-            game.StartGame();       // Startar spelet.
+            game.StartGame(playerName);       // Startar spelet.
             break;  
 
         case "2":
