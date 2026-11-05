@@ -20,7 +20,7 @@
         {
             Card temp = Cards[0];
             Cards.RemoveAt(0);
-            Console.WriteLine(temp.FullFace);
+            // Lite debug pwpwdpwdpConsole.WriteLine(temp.FullFace);
             return temp;
         }
         // Kolla på alla korten i kortleken, från Högst upp till ner.
