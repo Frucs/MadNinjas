@@ -1,0 +1,9 @@
+# Generated .NET build output
+**/bin/
+**/obj/
+
+# Local saved game results
+**/App_Data/
+
+# macOS metadata
+.DS_Store

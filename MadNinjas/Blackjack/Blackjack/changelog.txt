@@ -1,0 +1,16 @@
+2026-11-05 22:00, Frucs
+- Card.cs: Changed Look(), it now displays the Value of the Card too, which is nice.
+
+- Scoreboard.cs: Added more slots to the leaderboard / player list (used to be 5, now is 99)
+- Scoreboard.cs: ShowTopList() only shows the top 5, as asked in the Krav list.
+
+- Game.cs: Changed the string "player", to "hitOrStand", for more intuitive coding
+- Game.cs: When the player types hit, an empty line is added, for more intuitive gameplay
+- Game.cs: Games ending in a Tie now update the Scoreboard correctly.
+- Game.cs: Changed some Writelines.
+- Game.cs: Added a "Your new balance is:" Line after each game.
+- Game.cs: Fixed "Your bet:" so that it does not crash when a string is entered.
+- Game.cs: Fixed so that names such like "johan" matches names in uppercase like "JOHAN". They are treated as the same name.
+
+- ConsoleUI.cs: Removed a Linebreak from the top of the menu.
+- ConsoleUI.cs: Moved "Välkommen tillbaka NAME" message to Game.cs, where the check for profiles is.
