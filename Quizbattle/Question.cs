@@ -32,7 +32,7 @@ public abstract class Question : IQuestion  //abstract class som implementerar I
             Difficulty.Easy => 10,
             Difficulty.Medium => 20,
             Difficulty.Hard => 30,
-            _ => throw new ArgumentOutOfRangeException(nameof(difficulty), "Ogiltig svårighetsnivå.") //throwar ett argument out of range exception om svårighetsnivån är ogiltig
+            _ => throw new ArgumentOutOfRangeException(nameof(difficulty)) //throwar ett argument out of range exception om svårighetsnivån inte matchar någon av de definierade nivåerna
         };
     }
 }
