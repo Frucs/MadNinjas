@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Quizbattle
+namespace Quizbattle;
+
+public abstract class Question : IQuestion  //abstract class som implementerar IQuestion interface
 {
-    internal class Question
+    protected Question(string text, Difficulty difficulty) //Constructor!!
     {
-        public Question()
+        if (string.IsNullOrWhiteSpace(text)) //kollar ifall texten är null eller white space
         {
-            Console.WriteLine("This is a question class and I am pushing this just to see if it works.");
+            throw new ArgumentException("Fråga kan inte vara tom.", nameof(text));  //throwar ett argument exception om texten är nuell ellerwhite space
         }
     }
 }
