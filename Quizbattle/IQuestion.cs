@@ -7,7 +7,7 @@ namespace Quizbattle;
 
 public interface IQuestion
 {
-    string text { get; }
+    string Text { get; }
     Difficulty Difficulty { get; }
     int Points { get; }
     bool CheckAnswer(string input);
