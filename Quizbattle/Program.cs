@@ -1,7 +1,7 @@
-using Quizbattle;
+using QuizBattle; // Din ConsoleUI
+using Quizbattle; // Gruppens highscore-kod
 using System;
 using System.Collections.Generic;
-
 
 
 
