@@ -7,8 +7,8 @@
 // svar och visning av slutresultat.
 // Spelregler och poängberäkning hanteras av spelmotorn,
 // inte av ConsoleUI.
-
-namespace QuizBattle;  
+    using Quizbattle; // Hämtar Johans Player-klass
+    namespace Quizbattle;  
 
 public class ConsoleUI
 {
@@ -189,7 +189,7 @@ public void ShowFinalResult(
         Player player = ranking[i]; // Hämtar den aktuella spelaren.
 
         Console.WriteLine(
-            $"{i + 1}. {player.Name} - {player.Score} poäng " +
+            $"{i + 1}. {player.Name} - {player.Points} poäng" +
             $"({player.CorrectAnswers} rätt)"); // Visar placering och resultat.
     }
 

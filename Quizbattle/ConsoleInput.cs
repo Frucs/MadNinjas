@@ -6,7 +6,7 @@
 // Metoden kan återanvändas för exempelvis antal spelare,
 // antal rundor och menyval.
 
-namespace QuizBattle;
+namespace Quizbattle;
 
 public static class ConsoleInput
 {
