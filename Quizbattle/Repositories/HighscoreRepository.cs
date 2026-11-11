@@ -23,6 +23,11 @@ namespace Quizbattle.Repositories
             try
             {
                 string json = File.ReadAllText("highscores.json");
+                if (string.IsNullOrWhiteSpace(json))
+                {
+                    return new List<HighscoreEntry>();
+                } 
+
                 List<HighscoreEntry>? result = JsonSerializer.Deserialize<List<HighscoreEntry>>(json);
                 if (result == null)
                 {
