@@ -31,7 +31,8 @@ while (true)
             Console.WriteLine("=== TOPPLISTAN ===");
             foreach (HighscoreEntry entry in topplista)
             {
-                Console.WriteLine($"{entry.Name} - {entry.Score} poäng");
+                // Visar namn, poäng, antal rätta svar och datum.
+                Console.WriteLine($"{entry.Name} - {entry.Score} poäng - {entry.CorrectAnswers} rätta svar - {entry.Date:yyyy-MM-dd}");
             }
             break;
 
