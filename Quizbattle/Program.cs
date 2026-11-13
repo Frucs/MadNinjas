@@ -1,3 +1,44 @@
-﻿using Quizbattle;
+using Quizbattle;
 
-Console.WriteLine("Hello, World!");
+ConsoleUI ui = new ConsoleUI();
+
+while (true)
+{
+    int choice = ui.ShowMainMenu();
+
+    switch (choice)
+    {
+        case 1:
+            var (playerNames, rounds) = ui.ReadGameSetup();
+            Game game = new Game
+            {
+                Rounds = rounds,
+                PlayerAmount = playerNames.Count
+            };
+
+            foreach (string name in playerNames)
+            {
+                game.AddPlayer(new Player(name));
+            }
+
+            game.StartGame();
+            break;
+
+        case 2:
+            HighscoreService highscoreService = new HighscoreService();
+            List<HighscoreEntry> topplista = highscoreService.GetTopHighscores();
+
+            Console.WriteLine("=== TOPPLISTAN ===");
+            foreach (HighscoreEntry entry in topplista)
+            {
+                // Visar namn, poäng, antal rätta svar och datum.
+                Console.WriteLine($"{entry.Name} - {entry.Score} poäng - {entry.CorrectAnswers} rätta svar - {entry.Date:yyyy-MM-dd}");
+            }
+            break;
+
+        case 3:
+            return;
+    }
+
+    Console.WriteLine();
+}
