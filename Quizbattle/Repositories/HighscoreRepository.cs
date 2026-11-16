@@ -7,22 +7,32 @@ using System.Linq.Expressions;
 
 namespace Quizbattle.Repositories   
 {
-    public class HighscoreRepository 
+    public class HighscoreRepository
     {
-        public void SaveHighscores(List<HighscoreEntry> highscores) 
-        {
+        // sparar alla resultat i en JSON-fil.
+        public void SaveHighscores(List<HighscoreEntry> highscores)
+        { 
+
+            Directory.CreateDirectory("data");
+        
             string json = JsonSerializer.Serialize(highscores);
-             File.WriteAllText("highscores.json", json);
+             File.WriteAllText("data/highscores.json", json);
         }
+        // Hämtar  alla resultat från JSON-filen.
         public List<HighscoreEntry> LoadHighscores()
         {
-           if (!File.Exists("highscores.json"))
+           if (!File.Exists("data/highscores.json"))
             {
                 return new List<HighscoreEntry>();
             }
             try
             {
-                string json = File.ReadAllText("highscores.json");
+                string json = File.ReadAllText("data/highscores.json");
+                if (string.IsNullOrWhiteSpace(json))
+                {
+                    return new List<HighscoreEntry>();
+                } 
+
                 List<HighscoreEntry>? result = JsonSerializer.Deserialize<List<HighscoreEntry>>(json);
                 if (result == null)
                 {
