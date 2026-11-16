@@ -1,7 +1,7 @@
 ﻿using System.Text.Json;
 namespace Quizbattle;
 
-public class QuestionLoader : IQuestionLoader
+public class QuestionLoader
 {
     public List<Category> Load(string path) //metod som laddar frågor från en JSON-fil och returnerar en lista av kategorier
     {
