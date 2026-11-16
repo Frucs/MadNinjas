@@ -43,7 +43,7 @@ public class QuestionLoader
         }
         return categories;
     }
-    private static IQuestion ParseQuestion(JsonElement element)
+    private static IQuestion ParseQuestion(JsonElement element) 
     {
         string type = element.GetProperty("type").GetString() ?? "";
         string text = element.GetProperty("text").GetString() ?? "";
