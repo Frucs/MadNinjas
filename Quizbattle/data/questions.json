@@ -1,0 +1,193 @@
+{
+  "categories": [
+    {
+      "name": "Programmering",
+      "questions": [
+        {
+          "type": "multipleChoice",
+          "text": "Vilket tecken används i C# för att en klass ska ärva från en annan klass?",
+          "options": [
+            "->",
+            "=>",
+            ":",
+            "::"
+          ],
+          "correctIndex": 2,
+          "difficulty": "easy"
+        },
+        {
+          "type": "trueFalse",
+          "text": "I C# används typen int för heltal.",
+          "correct": true,
+          "difficulty": "easy"
+        },
+        {
+          "type": "multipleChoice",
+          "text": "Vilket Git-kommando skapar en ny gren och byter till den?",
+          "options": [
+            "git branch -d",
+            "git checkout -b",
+            "git merge",
+            "git clone"
+          ],
+          "correctIndex": 1,
+          "difficulty": "medium"
+        },
+        {
+          "type": "trueFalse",
+          "text": "En abstrakt klass i C# kan instansieras med new.",
+          "correct": false,
+          "difficulty": "medium"
+        },
+        {
+          "type": "multipleChoice",
+          "text": "Vilken samling i C# passar bäst för en lista som kan växa och krympa?",
+          "options": [
+            "List<T>",
+            "int[]",
+            "string",
+            "char"
+          ],
+          "correctIndex": 0,
+          "difficulty": "easy"
+        },
+        {
+          "type": "multipleChoice",
+          "text": "Vad händer om du anropar First() med LINQ på en tom lista?",
+          "options": [
+            "Det returneras null",
+            "Det returneras 0",
+            "Ett undantag kastas",
+            "Det returneras en tom lista"
+          ],
+          "correctIndex": 2,
+          "difficulty": "hard"
+        }
+      ]
+    },
+    {
+      "name": "Geografi",
+      "questions": [
+        {
+          "type": "multipleChoice",
+          "text": "Vilken är Sveriges huvudstad?",
+          "options": [
+            "Göteborg",
+            "Stockholm",
+            "Malmö",
+            "Uppsala"
+          ],
+          "correctIndex": 1,
+          "difficulty": "easy"
+        },
+        {
+          "type": "trueFalse",
+          "text": "Göteborg ligger vid Västerhavet.",
+          "correct": true,
+          "difficulty": "easy"
+        },
+        {
+          "type": "multipleChoice",
+          "text": "Vilken är Europas längsta flod?",
+          "options": [
+            "Donau",
+            "Rhen",
+            "Loire",
+            "Volga"
+          ],
+          "correctIndex": 3,
+          "difficulty": "medium"
+        },
+        {
+          "type": "trueFalse",
+          "text": "Mount Everest ligger i Anderna.",
+          "correct": false,
+          "difficulty": "medium"
+        },
+        {
+          "type": "multipleChoice",
+          "text": "Vilken är Sveriges största sjö?",
+          "options": [
+            "Vänern",
+            "Vättern",
+            "Mälaren",
+            "Hjälmaren"
+          ],
+          "correctIndex": 0,
+          "difficulty": "medium"
+        },
+        {
+          "type": "multipleChoice",
+          "text": "Vilket land har flest invånare i Afrika?",
+          "options": [
+            "Egypten",
+            "Etiopien",
+            "Nigeria",
+            "Sydafrika"
+          ],
+          "correctIndex": 2,
+          "difficulty": "hard"
+        }
+      ]
+    },
+    {
+      "name": "Allmänbildning",
+      "questions": [
+        {
+          "type": "multipleChoice",
+          "text": "Hur många sidor har en hexagon?",
+          "options": [
+            "Fem",
+            "Sex",
+            "Sju",
+            "Åtta"
+          ],
+          "correctIndex": 1,
+          "difficulty": "easy"
+        },
+        {
+          "type": "trueFalse",
+          "text": "Vatten kokar vid 100 grader Celsius vid normalt lufttryck.",
+          "correct": true,
+          "difficulty": "easy"
+        },
+        {
+          "type": "multipleChoice",
+          "text": "Vilken kemisk symbol har guld?",
+          "options": [
+            "Ag",
+            "Gd",
+            "Au",
+            "Go"
+          ],
+          "correctIndex": 2,
+          "difficulty": "medium"
+        },
+        {
+          "type": "trueFalse",
+          "text": "Blåvalen är det största djur som någonsin har levt.",
+          "correct": true,
+          "difficulty": "medium"
+        },
+        {
+          "type": "multipleChoice",
+          "text": "Vilket är det vanligaste grundämnet i universum?",
+          "options": [
+            "Helium",
+            "Väte",
+            "Syre",
+            "Kol"
+          ],
+          "correctIndex": 1,
+          "difficulty": "hard"
+        },
+        {
+          "type": "trueFalse",
+          "text": "Botaniskt sett är en gurka en frukt.",
+          "correct": true,
+          "difficulty": "hard"
+        }
+      ]
+    }
+  ]
+}
