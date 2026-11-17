@@ -7,7 +7,7 @@ namespace Quizbattle;
 
 public class Questionbank //håller i frågorna som inte har blivit ställda än 
 {
-    private readonly List<Category> _categories;
+    public readonly List<Category> _categories;
     public Questionbank(List<Category> categories)
     {
         //kopierar kategorierna och frågorna för att undivika att de ändras utanför questionbanken + spelet kan starta med en full lista av f¨ågor 

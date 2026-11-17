@@ -13,7 +13,8 @@ while (true)
             Game game = new Game
             {
                 Rounds = rounds,
-                PlayerAmount = playerNames.Count
+                PlayerAmount = playerNames.Count,
+                ui = ui
             };
 
             foreach (string name in playerNames)
@@ -26,10 +27,10 @@ while (true)
 
         case 2:
             HighscoreService highscoreService = new HighscoreService();
-            List<HighscoreEntry> topplista = highscoreService.GetTopHighscores();
+            List<HighscoreEntry> highscore = highscoreService.GetTopHighscores();
 
             Console.WriteLine("=== TOPPLISTAN ===");
-            foreach (HighscoreEntry entry in topplista)
+            foreach (HighscoreEntry entry in highscore)
             {
                 // Visar namn, poäng, antal rätta svar och datum.
                 Console.WriteLine($"{entry.Name} - {entry.Score} poäng - {entry.CorrectAnswers} rätta svar - {entry.Date:yyyy-MM-dd}");

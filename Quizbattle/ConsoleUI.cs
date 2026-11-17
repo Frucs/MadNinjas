@@ -37,8 +37,8 @@ public class ConsoleUI
 
             }
             Console.WriteLine("Felaktigt val! Försök igen.");
-    } // Avslutar while-loopen
-} // Avslutar ShowMainMenu-metoden
+        } // Avslutar while-loopen
+    } // Avslutar ShowMainMenu-metoden
 
 // Läser in spelarnas namn och antalet rundor.
 // Returnerar inställningarna som senare används av spelmotorn.
@@ -65,7 +65,7 @@ public (List<string> PlayerNames, int Rounds) ReadGameSetup()
 
 // Visar kategorier och låter spelaren välja en kategori eller slumpa.
 // Returnerar kategoriens index, eller -1 om spelaren väljer Slumpa.
-public int ReadCategoryChoice(IReadOnlyList<string> categoryNames) // Tar emot en lista med kategorinamn.
+public int ReadCategoryChoice(IReadOnlyList<string> categoryNames, IReadOnlyList<int> categoryNumbers) // Tar emot en lista med kategorinamn.
 {
     if (categoryNames.Count == 0) // Kontrollerar om listan är tom.
     {
@@ -76,7 +76,7 @@ public int ReadCategoryChoice(IReadOnlyList<string> categoryNames) // Tar emot e
 
     for (int i = 0; i < categoryNames.Count; i++) // Går igenom alla kategorier i listan.
     {
-        Console.WriteLine($"{i + 1}. {categoryNames[i]}"); // Visar kategorins nummer och namn.
+        Console.WriteLine($"{i + 1}. {categoryNames[i]}[{categoryNumbers[i]}]"); // Visar kategorins nummer och namn.
     }
 
     int randomOption = categoryNames.Count + 1; // Placerar Slumpa efter sista kategorin.
@@ -103,7 +103,6 @@ public int ReadCategoryChoice(IReadOnlyList<string> categoryNames) // Tar emot e
 public string ReadMultipleChoiceAnswer(
     string categoryName,
     string questionText,
-    int points,
     IReadOnlyList<string> options)
 {
     if (options.Count != 4) // Säkerställer att frågan har exakt fyra alternativ.
@@ -113,7 +112,6 @@ public string ReadMultipleChoiceAnswer(
 
     Console.WriteLine(); // Skapar en tom rad för bättre läsbarhet.
     Console.WriteLine($"Kategori: {categoryName}"); // Visar frågans kategori.
-    Console.WriteLine($"Poäng: {points}"); // Visar hur många grundpoäng frågan är värd.
     Console.WriteLine(questionText); // Visar själva frågan.
 
     for (int i = 0; i < options.Count; i++) // Går igenom alla svarsalternativ.
@@ -131,14 +129,11 @@ public string ReadMultipleChoiceAnswer(
 // Returnerar "true" eller "false" enligt gruppens kontrakt.
 public string ReadTrueFalseAnswer(
     string categoryName,
-    string questionText,
-    int points)
+    string questionText)
 {
     Console.WriteLine(); // Skapar en tom rad för bättre läsbarhet.
 
     Console.WriteLine($"Kategori: {categoryName}"); // Visar frågans kategori.
-
-    Console.WriteLine($"Poäng: {points}"); // Visar frågans grundpoäng.
 
     Console.WriteLine(questionText); // Visar frågan.
 
